@@ -1,4 +1,4 @@
-a = int(input("Enter first number: "))
-b = int(input("Enter second number: "))
-c = int(input("Enter third number: "))
-print("a + b + c = ", a + b + c)
+a = int(input())   # зчитуємо першу цифру і перетворюємо рядок на ціле число
+b = int(input())   # зчитуємо другу цифру і перетворюємо рядок на ціле число
+c = int(input())   # зчитуємо третю цифру і перетворюємо рядок на ціле число
+print(a + b + c)   # виводимо суму трьох чисел
