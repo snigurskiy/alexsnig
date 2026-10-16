@@ -1,2 +1,4 @@
-num = int(input(Enter first number: ))
-print(num)
+# Зчитуємо введене значення та перетворюємо на дійсне число
+num = float(input("Enter number: ")) 
+print(num) # Виводимо дійсне число
+print(int(num)) # Перетворюємо його на ціле та виводимо
