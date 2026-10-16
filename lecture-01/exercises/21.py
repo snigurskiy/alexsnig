@@ -1,13 +1,13 @@
 # Описуємо функцію для годин і хвилин
-def show_clock(hours, minutes):
+def show_clock(total_minutes):
     # Виділяємо повні години
-    hours = total_minutes // 24
+    hours = total_minutes // 60
     # Із залишку виділяємо повні хвилини
     minutes = total_minutes % 60
     # Виводимо результат для одного числа
     print(hours, minutes)
 
-# Зчитуємо всі три значення
+# Задаємо усі три значення
 a = 150
 b = 25
 c = 440
