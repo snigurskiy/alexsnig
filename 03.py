@@ -1,17 +1,14 @@
-str = "amaama"
-polyndrome = True
-for i in range(len(str) // 2):
-    if str[i] != str[len(str) - 1 - i]:
-        polyndrome = False
-        break
-    while i < len(str) // 2:
-        if str[i] != str[len(str) - 1 - i]:
-            polyndrome = False
-            break
-        i += 1
+str1 = "amaama"
+palindrome = True # припускаємо, що рядок є паліндромом
+i = 0 # починаємо з першого символу
+
+while i < len(str1) // 2:
+    if str1[i] != str1[len(str1) - 1 - i]:
+        palindrome = False # знайшли різні символи
+        break # завершуємо перевірку
+    i += 1 # переходимо до наступної пари
+
+if palindrome:
+    print("The entered string is a palindrome")
 else:
-    polyndrome = False
-if polyndrome:
-    print("The entered string is a polyndrome")
-else:
-    print("The entered string is not a polyndrome")
+    print("The entered string is not a palindrome")
