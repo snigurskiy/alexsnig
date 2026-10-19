@@ -1,58 +1,67 @@
-def get_number(prompt):
-    """Prompts user for number, handles invalid input with loop."""
-    while True:
-        try:
-            user_input = input(prompt).strip()
-            number = float(user_input)
-            return number
-        except ValueError:
-            print("Invalid input. Please enter a number.")
-
-def get_operation():
-    """Gets valid operation from user with validation."""
-    valid_ops = {'+', '-', '*', '/'}
-    while True:
-        op = input('Enter operation (+, -, *, /): ').strip()
-        if op in valid_ops:
-            return op
-        print("Invalid operation. Use only +, -, *, or /.")
-        
-def calculate(num1, num2, operation):
-    """Performs calculation, handles division by zero."""
-    if operation == '+':
-        return num1 + num2
-    elif operation == '-':
-        return num1 - num2
-    elif operation == '*':
-        return num1 * num2
-    elif operation == '/':
-        if num2 == 0:
-            print("Error: Cannot divide by zero.")
-            return None
-        return num1 / num2
-
-    # Invalid ops caught by get_operation(), this shouldn't trigger
-    return None
+def get_number(prompt): # функція отримує текст запрошення для введення
+    """Зчитує число та повторює запит у разі помилки."""
+    while True: # повторюємо введення, доки не отримаємо число
+        try: # пробуємо виконати код, у якому можлива помилка
+            user_input = input(prompt).strip().replace(",", ".") # прибираємо крайні пробіли та замінюємо кому крапкою
+            number = float(user_input) # перетворюємо введений рядок на дійсне число
+            return number # повертаємо число та завершуємо функцію
+        except ValueError: # якщо введений текст неможливо перетворити на число
+            print("Помилка: введіть число.") # повідомляємо про помилку
 
 
-def main():
-    """Main calculator loop."""
-    print("=== Simple Command-Line Calculator ===\n")
-    while True:
-        # Get inputs
-        num1 = get_number("Enter first number: ")
-        num2 = get_number("Enter second number: ")
-        op = get_operation()
-        # Calculate and display
-        result = calculate(num1, num2, op)
-        if result is not None:
-            # Smart formatting avoids float precision issues (0.1+0.2=0.3)
-            print(f"Result: {num1} {op} {num2} = {result:.10g}\n")
-        # Errors already printed by calculate()
-        # Continue?
-        again = input("Another calculation? (y/n): ").strip().lower()
-        if again not in ('y', 'yes'):
-            break
-    print("Thanks for using the calculator. Goodbye!")
-    
-main()
+def get_operation(): # функція зчитує та перевіряє операцію
+    """Повертає одну з дозволених операцій."""
+    valid_ops = {'+', '-', '*', '/', '**', '//', '%'} # множина дозволених операцій
+    while True: # повторюємо запит до введення правильної операції
+        op = input("Введіть операцію (+, -, *, /, **, //, %): ").strip() # зчитуємо операцію та прибираємо крайні пробіли
+        if op in valid_ops: # перевіряємо, чи є операція серед дозволених
+            return op # повертаємо операцію та завершуємо функцію
+        print("Помилка: використовуйте +, -, *, /, **, // або %.") # повідомляємо про неправильну операцію
+
+
+def calculate(num1, num2, operation): # функція отримує два числа й операцію
+    """Обчислює результат і перевіряє ділення на нуль."""
+    if (operation == '/' or operation == '//' or operation == '%') and num2 == 0: # перевіряємо нуль для всіх операцій ділення
+        print("Помилка: ділити на нуль не можна.") # повідомляємо про помилку
+        return None # повертаємо відсутність результату та завершуємо функцію
+    if operation == '+': # якщо вибрано додавання
+        return num1 + num2 # повертаємо суму
+    elif operation == '-': # якщо вибрано віднімання
+        return num1 - num2 # повертаємо різницю
+    elif operation == '*': # якщо вибрано множення
+        return num1 * num2 # повертаємо добуток
+    elif operation == '/': # якщо вибрано звичайне ділення
+        return num1 / num2 # повертаємо частку
+    elif operation == '//': # якщо вибрано ділення з округленням униз
+        return num1 // num2 # повертаємо результат ділення націло
+    elif operation == '%': # якщо вибрано остачу від ділення
+        return num1 % num2 # повертаємо остачу
+    elif operation == '**': # якщо вибрано піднесення до степеня
+        try: # перевіряємо можливі помилки піднесення до степеня
+            return num1 ** num2 # повертаємо перше число у степені другого
+        except ZeroDivisionError: # нуль не можна підносити до від’ємного степеня
+            print("Помилка: нуль не можна підносити до від’ємного степеня.") # пояснюємо причину
+            return None # повертаємо відсутність результату
+        except OverflowError: # результат може перевищити можливості типу float
+            print("Помилка: результат піднесення до степеня завеликий.") # повідомляємо про перевищення
+            return None # повертаємо відсутність результату
+    return None # повертаємо відсутність результату, якщо операцію не знайдено
+
+
+def main(): # головна функція керує роботою калькулятора
+    """Повторює обчислення, доки користувач бажає продовжувати."""
+    print("=== Калькулятор ===\n") # виводимо заголовок і порожній рядок
+    while True: # повторюємо обчислення до команди виходу
+        num1 = get_number("Введіть перше число: ") # отримуємо перевірене перше число
+        num2 = get_number("Введіть друге число: ") # отримуємо перевірене друге число
+        op = get_operation() # отримуємо перевірену операцію
+        result = calculate(num1, num2, op) # передаємо числа й операцію у функцію обчислення
+        if result is not None: # виводимо результат, лише якщо обчислення успішне
+            print(f"Результат: {num1} {op} {num2} = {result:.10g}\n") # форматуємо результат до 10 значущих цифр
+        again = input("Ще одне обчислення? (так/ні): ").strip().lower() # зчитуємо відповідь і переводимо літери в нижній регістр
+        if again not in ('так', 'т', 'yes', 'y'): # якщо відповідь не означає згоду
+            break # завершуємо цикл обчислень
+    print("Дякую за використання калькулятора!") # виводимо повідомлення після завершення циклу
+
+
+main() # викликаємо головну функцію та запускаємо калькулятор
