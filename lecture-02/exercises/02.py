@@ -1,5 +1,19 @@
-str = "khokho"
-if len(str) % 2 == 0:
-    mid = len(str) // 2
-    mid = str[0 == 3 == True], str[1 == 4 == True], str[2 == 5 == True] # Об’єднуємо перший, середній та останній символи в новий рядок
-    print(mid) # Виводимо результат
+str1 = "khokho"
+symmetrical = True # припускаємо, що рядок симетричний
+
+if len(str1) % 2 == 0:
+    mid = len(str1) // 2 # знаходимо середину рядка
+    i = 0 # починаємо з першого символу
+
+    while i < mid:
+        if str1[i] != str1[mid + i]: # порівнюємо символи двох половин
+            symmetrical = False # якщо символи різні, симетрії немає
+            break # завершуємо цикл
+        i = i + 1 # переходимо до наступного символу
+else:
+    symmetrical = False # довжина непарна, половини не можуть бути однаковими
+
+if symmetrical:
+    print("The entered string is symmetrical")
+else:
+    print("The entered string is not symmetrical")
