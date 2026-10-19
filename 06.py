@@ -10,11 +10,11 @@ def emi(P, r, n):
     n = Decimal(n)
 
     # обчислюємо щомісячний платіж за формулою EMI
-    EMI = P * [(r * (1 + r) ** n) / ((1 + r) ** n - 1)]
+    EMI = P * ((r * (1 + r) ** n) / ((1 + r) ** n - 1))
     return EMI
 
 # зчитуємо дані як рядки, без перетворення на float
-principal = input("Princiapl amount borrowed: ")
+principal = input("Princiapal amount borrowed: ")
 rate = input("Periodic monthly interest rate: ")
 numbers = input("Total number of monthly payments: ")
 
@@ -22,4 +22,7 @@ numbers = input("Total number of monthly payments: ")
 result = emi(principal, rate, numbers)
 
 # виводимо отриману суму та округлюємо до сотих
-print("EMI for 24 months:" + str(result.quantize(Decimal("0.01"))))
+print(
+    "EMI for", numbers, "months:",
+    result.quantize(Decimal("0.01"))
+)
