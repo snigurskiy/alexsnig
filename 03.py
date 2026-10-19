@@ -9,6 +9,6 @@ while i < len(str1) // 2:
     i += 1 # переходимо до наступної пари
 
 if palindrome:
-    print("The entered string is a palindrome")
+    print("The entered string is palindrome")
 else:
-    print("The entered string is not a palindrome")
+    print("The entered string is not palindrome")
