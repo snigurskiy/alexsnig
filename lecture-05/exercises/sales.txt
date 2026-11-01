@@ -1,0 +1,7 @@
+mouse 100
+mobile 20
+USB 39
+USB 39
+USB 39
+laptop 30
+board 12
