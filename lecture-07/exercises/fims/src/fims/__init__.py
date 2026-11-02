@@ -7,6 +7,7 @@ __app_name__ = "fims"
 __version__ = "0.1.0"
 TITLE = "File Integrity Monitoring System"
 
+
 monitor = [
    {
      'path':'/home/janus/projects/py.dev/monitoring',
@@ -17,6 +18,7 @@ monitor = [
       'recursive':False
    }
 ]
+
 
 DATABASE_PATH = os.path.dirname(os.path.realpath(__file__))
 
