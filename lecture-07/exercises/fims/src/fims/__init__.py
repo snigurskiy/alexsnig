@@ -10,11 +10,11 @@ TITLE = "File Integrity Monitoring System"
 
 monitor = [
    {
-     'path':'/home/janus/projects/py.dev/monitoring',
+     'path':r'C:\Users\User\Documents\Lessons-Py\monitor_files',
      'recursive':True
    },
    {
-      'path':'/home/janus/projects/py.dev/monitoring/no-recursive', 
+      'path':r'C:\Users\User\Documents\Lessons-Py\no_monitor_files', 
       'recursive':False
    }
 ]
